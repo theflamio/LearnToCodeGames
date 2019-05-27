@@ -39,7 +39,12 @@ public class PlayerController : MonoBehaviour
             gameScore++;
             SetScoreText();
         }
-        else if (other.gameObject.CompareTag("Monster"))
+        
+    }
+
+    void OnCollisionEnter(Collision other){
+        
+        if (other.gameObject.CompareTag("Monster"))
         {
             Lose();
         }
