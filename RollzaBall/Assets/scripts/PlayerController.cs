@@ -39,14 +39,25 @@ public class PlayerController : MonoBehaviour
             gameScore++;
             SetScoreText();
         }
+        else if (other.gameObject.CompareTag("Monster"))
+        {
+            Lose();
+        }
     }
 
     void SetScoreText(){
+
         scoreText.text = "Score: " + gameScore.ToString();
         if (gameScore >= 8)
         {
             winText.text = "You win !";
         }
+        
+    }
+
+    void Lose()
+    {
+        winText.text = "You Lose !";
     }       
 }   
 
