@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     
     public float speed = 100;
 
-    public Text scoreText;
-    public Text winText;
+    public bool playerLostGame = false;
+
+    public bool playerWonGame = false;
+
+    public TextMeshProUGUI scoreText;
 
     private Rigidbody rb;
 
-    private int gameScore = 0;
+    private int score = 0;
 
     void Start() {
+        Time.timeScale = 1f;
         rb = GetComponent<Rigidbody>();
-        SetScoreText();
-        winText.text = "";
+        score = 0;
+        scoreText.text = "Score " + score.ToString();
     }
 
     void FixedUpdate() {
@@ -31,38 +36,42 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
-    void OnTriggerEnter(Collider other) {
-
+    void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.CompareTag("Pick Up"))
         {
             other.gameObject.SetActive(false);
-            gameScore++;
-            SetScoreText();
+            score++;
+            Win();
         }
-        
     }
 
-    void OnCollisionEnter(Collision other){
-        
+    void OnCollisionEnter(Collision other)
+    {
+
         if (other.gameObject.CompareTag("Monster"))
         {
-            Lose();
+            playerLostGame = true;
         }
-    }
-
-    void SetScoreText(){
-
-        scoreText.text = "Score: " + gameScore.ToString();
-        if (gameScore >= 8)
+        else
         {
-            winText.text = "You win !";
+            playerLostGame = false;
         }
-        
     }
 
-    void Lose()
+    void Win()
     {
-        winText.text = "You Lose !";
-    }       
+
+        scoreText.text = "Score " + score.ToString();
+        if (score >= 8)
+        {
+            playerWonGame = true;
+        }
+        else
+        {
+            playerWonGame = false;
+        }
+
+    }
 }   
 
