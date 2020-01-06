@@ -48,6 +48,11 @@ public class GameMenu : MonoBehaviour
         GameIsPause = false;
     }
 
+    public void OptionGame()
+    {
+
+    }
+
     public void TryAgain()
     {
         loseMenuUI.SetActive(false);
