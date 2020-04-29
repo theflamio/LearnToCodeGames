@@ -10,21 +10,6 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void LoadGame()
-    {
-
-    }
-
-    public void OptionGame()
-    {
-
-    }
-
-    public void HighScoreGame()
-    {
-
-    }
-
     public void ExitGame()
     {
         Application.Quit();
